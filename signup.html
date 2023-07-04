@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<language="ro"></language>
+<html>
+<head>
+    <title>Sign up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3f5a36;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 3px solid #000;
+            border-radius: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .container h2 {
+                text-align: center;
+            }
+
+            .container input[type="text"],
+            .container input[type="password"],
+            .container input[type="email"],
+            .container input[type="tel"],
+            .container select {
+                width: 95%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+
+            .container input[type="radio"] {
+                margin: 0 5px;
+            }
+
+            .container input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #4CAF50;
+                color: #fff;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            .container input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+            .container p {
+                text-align: center;
+            }
+
+            .container .home-button {
+                text-align: center;
+                margin-top: 10px;
+            }
+            .button:hover {
+                background-color: #4e6d45;
+            }
+
+            .container .home-button a {
+                    text-decoration: none;
+                    background-color: #ccc;
+                    color: #000;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                }    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form id="signup-form" action="register.php" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Parolă" required>
+            <input type="password" name="confirm_password" placeholder="Confirmă Parola" required>
+            <label>Sex:</label>
+            <input type="radio" name="gender" value="male" checked> Bărbat
+            <input type="radio" name="gender" value="female"> Femeie
+            <input type="radio" name="gender" value="other"> Prefer să nu spun
+            <input type="tel" name="phone" placeholder="Număr de Telefon" required>
+            <select name="country">
+                <option value="România">România</option>
+                <option value="Moldova">Moldova</option>
+                <option value="Altă Țară">Altă Țară</option>
+            </select>
+            <input type="submit" value="Sign Up">
+        </form>
+        <p>Ai deja cont? <a href="login.html">Login</a></p>
+        <div class="home-button">
+            <a href="index.html">Acasă</a>
+        </div>
+    </div>
+
+    <script>
+        const signupForm = document.getElementById('signup-form');
+        signupForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = signupForm.querySelector('input[name="username"]').value;
+            const email = signupForm.querySelector('input[name="email"]').value;
+            const password = signupForm.querySelector('input[name="password"]').value;
+            const confirm_password = signupForm.querySelector('input[name="confirm_password"]').value;
+
+            if (username && email && password && confirm_password && password === confirm_password) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
