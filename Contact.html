@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3f5a36;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border: 3px solid #000;
+            border-radius: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .container h2 {
+                text-align: center;
+            }
+
+            .container input[type="text"],
+            .container input[type="email"],
+            .container textarea {
+                width: 95%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+
+            .container textarea {
+                height: 100px;
+            }
+
+            .container input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #4CAF50;
+                color: #fff;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+                .container input[type="submit"]:hover {
+                    background-color: #45a049;
+                }
+
+            .container p {
+                text-align: center;
+            }
+
+            .container .home-button {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+                .container .home-button a {
+                    text-decoration: none;
+                    background-color: #ccc;
+                    color: #000;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                }
+                .button:hover {
+                background-color: #4e6d45;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Contacteaza-ne</h2>
+        <form action="multumiri.html" method="post">
+            <input type="text" name="name" placeholder="Numele Tău" required>
+            <input type="email" name="email" placeholder="Email-ul Tău" required>
+            <textarea name="message" placeholder="Mesajul Tău" required></textarea>
+            <input type="submit" value="Trimite">
+        </form>
+        <div class="home-button">
+            <a href="index.html">Acasă</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Recenzii</title>
+    <style>
+        .aranjament{
+            display: flex;
+            flex-direction: column;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3f5a36;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+           
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border: 3px solid #000;
+            border-radius: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .button:hover {
+                background-color: #4e6d45;
+            }
+
+        .container h1 {
+            text-align: center;
+        }
+
+        .container input[type="text"],
+        .container input[type="range"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .container input[type="range"] {
+            width: 200px;
+        }
+
+        .container button[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .container button[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        .container h2 {
+            text-align: center;
+        }
+
+        .container #ratings-container {
+            text-align: center;
+        }
+
+        .container #ratings-container div {
+            margin-bottom: 10px;
+        }
+
+        .container .home-button {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .container .home-button a {
+            text-decoration: none;
+            background-color: #ccc;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+    </style>
+    <script>
+        function saveRating() {
+            var name = document.getElementById("name").value;
+            var rating = document.getElementById("rating").value;
+
+            var ratingObj = { name: name, rating: rating };
+
+            var ratings = JSON.parse(localStorage.getItem("ratings")) || [];
+
+            ratings.push(ratingObj);
+
+            localStorage.setItem("ratings", JSON.stringify(ratings));
+
+            document.getElementById("name").value = "";
+            document.getElementById("rating").value = "";
+
+            displayRatings();
+        }
+
+        function displayRatings() {
+           
+            var ratings = JSON.parse(localStorage.getItem("ratings")) || [];
+
+            var ratingsContainer = document.getElementById("ratings-container");
+
+            ratingsContainer.innerHTML = "";
+
+            for (var i = 0; i < ratings.length; i++) {
+                var ratingObj = ratings[i];
+                var ratingItem = document.createElement("div");
+                ratingItem.innerHTML = "<strong>" + ratingObj.name + ":</strong> " + getRatingStars(ratingObj.rating);
+                ratingsContainer.appendChild(ratingItem);
+            }
+        }
+
+        function getRatingStars(rating) {
+            var stars = "";
+            for (var i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += "★ ";
+                } else {
+                    stars += "☆ ";
+                }
+            }
+            return stars;
+        }
+
+        window.onload = displayRatings;
+    </script>
+</head>
+<body>
+    <div class="aranjament">
+    <div class="container">
+        <h1>Recenzii</h1>
+        <form>
+            <p><label for="name">Nume:</label>
+                <input type="text" id="name" required></p>
+            <p><label for="rating">Recenzie:</label>
+                <input type="range" id="rating" min="1" max="5" step="1" class="rating-slider" required></p>
+
+            <button type="button" onclick="saveRating()">Posteaza</button>
+        </form>
+
+        <div class="home-button">
+            <a href="index.html">Acasă</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Recenziile celorlalți:</h2>
+        <div id="ratings-container"></div>
+    </div>
+</div>
+</body>
+</html>

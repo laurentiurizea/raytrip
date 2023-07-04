@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+        <title>Raytrip</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+                color: white;
+                background-color: #3f5a36;
+                font-family: "Rubik";
+            }
+
+            .line-container {
+                position: relative;
+                width: 100%;
+                height: 2px;
+                background-color: #ffffff;
+            }
+
+            .line-container::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: inherit;
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 5s linear;
+            }
+
+            .line-container:hover::before {
+                    transform: scaleX(1);
+            }
+
+            .footer {
+                 background-color: #f2f2f2;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .footer-buttons {
+                      margin-top: 150px;
+            }
+    
+            .footer-button {
+                    display: inline-block;
+                    padding: 10px 60px;
+                    background-color: #4a6741;
+                    color: #ffffff;
+                    text-decoration: none;
+                    border: 2px solid #22311d;
+                    border-radius: 15px;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                    margin: 5px;
+                    padding: 10px 50px;
+                    cursor: pointer;
+            }
+
+            .image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 55vh;
+            }
+
+            .image-container img {
+                    max-width: 55%;
+                    height: auto;
+            }
+
+            .word-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+                font-size: 20px;
+            }
+        
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 14vh;
+                flex-direction: column;
+            }
+
+            .line {
+                width: 100%;
+                height: 2px;
+                background-color: #ffffff;
+            }
+     
+            .top-section {
+                background-color: #3f5a36;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .button {
+                width: 1000px;
+                height: 100px;
+                cursor: pointer;
+                color: white;
+                font-size: 21px;
+                border-radius: 1rem;
+                border: none;
+                position: relative;
+                background-color: #3f5a36;
+                transition: 0.1s;
+                text-align: center;
+            }
+
+            button::after {
+                content: none;
+                width: 100%;
+                height: 100%;
+                background-image: radial-gradient( circle farthest-corner at 10% 20%, rgba(2,245,255,1) 100.2%);
+                filter: blur(15px);
+                z-index: -1;
+                position: absolute;
+                Left: 0;
+                top: 0;
+            }
+
+            button:active {
+                transform:scale(0.9) rotate(3deg);
+                background: radial-gradient( circle farthest-corner at 10% 20%, rgba(255,94.247,1) 17.8%, rgba(2,245,255,1) 100.2%);
+                transition: 0.5s;
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .location-card {
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin:20px;
+                max-width: 300px;
+                width: 100%;
+            }
+            .location-card h2 {
+                margin-top: 0;
+             }
+            .location-card p {
+                margin-bottom: 10px;
+            }
+            .booking-button {
+                display: inline-block;
+                margin-bottom: 5px;
+                background: #4a6741;
+                color: #ffffff;
+                text-align: center;
+                border: 2px solid #22311d;
+                border-radius: 15px;
+            }
+		    .reading-button {
+                display: inline-block;
+                margin-bottom: 5px;
+                background: #4a6741;
+                color: #ffffff;
+                text-align: center;
+                border: 2px solid #22311d;
+                border-radius: 15px;
+			}
+			
+		   .sec {
+                 color: white;
+                background-color: #3f5a36;
+                font-family: "Rubik";
+				padding-bottom: 200px;
+            }
+            .scroll-container {
+                position: relative;
+                width: 100%;
+                height: 100vh; /* Adjust as needed */
+                overflow: hidden;
+            }
+
+            .scroll-content {
+                height: 100%;
+                overflow-y: scroll;
+            }
+
+            .scroll-slider {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 8px; /* Adjust the width of the slider as needed */
+                background-color: #999; /* Adjust the background color of the slider */
+                opacity: 0.5; /* Adjust the opacity of the slider */
+                border-radius: 4px; /* Adjust the border radius of the slider */
+                z-index: 1;
+                cursor: pointer;
+                transition: opacity 0.3s;
+            }
+
+            .scroll-slider:hover {
+                opacity: 0.8; /* Adjust the opacity of the slider on hover */
+            }
+
+            .title-image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .title-image-container img {
+                max-width: 1250px; /* Adjust the value as per your preference */
+                height: 250px; /* Maintain the aspect ratio */
+            }
+
+            .footer-image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .footer-image-container img {
+                max-width: 524px; /* Adjust the value as per your preference */
+                height: 100px; /* Maintain the aspect ratio */
+            }
+
+            .footer-button:hover {
+                background-color: #4e6d45;
+            }
+            .footer-button a {
+                color: white;
+            }
+
+            .button-sus {
+                display: inline-block;
+                padding: 10px 60px;
+                background-color: #4a6741;
+                color: #ffffff;
+                text-decoration: none;
+                border: 2px solid #22311d;
+                border-radius: 15px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+            }
+
+            .button-sus:hover {
+                background-color: #4e6d45;
+            }
+            .button-sus a {
+                color: white;
+            }
+
+        </style>
+
+        <body>
+            <div class="title-image-container">
+                <img src="RayTrip_1_ret.png">
+            </div>
+        <br>
+        <div class="line"></div>
+        <div class="top-section">
+		<div class="button-sus">
+                <a href="index.html">Acasă</a>
+            </div>
+            <div class="button-sus">
+                <a href="Contact.html">Contact</a>
+            </div>
+            <div class="button-sus">
+                <a href="recenzii.html">Recenzii</a>
+            </div>
+            <div class="button-sus">
+                <a href="#"><a href="signup.html"> Sign up | Login</a>
+            </div>
+        </div>
+    </body>    
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="image-container">
+        <img src="Untitled-3 (1).png">
+    </div>	
+
+
+    <br>
+    <br>
+	<br>
+	<br>
+			<div class="sec">
+	
+                <head>
+                    <title>Destinations</title>
+                    <style>
+                        .continent-container {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                        }
+                
+                        .continent {
+                            width: 31%;
+                            margin: 10px;
+                            text-align: center;
+                            font-size: 26px;
+                        }
+                
+                        .country {
+                            font-size: 24px;
+                            font-weight: bold;
+                            margin-top: 20px;
+                        }
+                
+                        .city {
+                            margin-left: 30px;
+                        }
+                
+                        button {
+                            display: inline-block;
+                            padding: 10px 60px;
+                            background-color: #4a6741;
+                            color: #ffffff;
+                            text-decoration: none;
+                            border: 2px solid #22311d;
+                            border-radius: 15px;
+                            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                            text-align: center;
+                            cursor: pointer;
+                        }
+                        .button:hover {
+                            background-color: #4e6d45;
+                            color: white;
+                        }
+                
+                        .title {
+                            text-align: center;
+                            font-size: 26px;  
+                        }
+                
+                        ul, ol {
+                            list-style: none;
+                            padding: 0;
+                            margin: 0;
+                        }
+                    </style>
+                </head>
+                <head>
+                    <title>Destinatii Populare</title>
+                    <script>
+                        function redirectToCity(cityName) {
+                            var baseUrl = 'https://www.booking.com/';
+                            var cityUrl = cityName.toLowerCase().replace(/\s/g, '-');
+                            window.location.href = baseUrl + cityUrl;
+                        }
+                    </script>
+                </head>
+                <body>
+                    
+                    <div class="image-container">
+                        <img src="aviondecolare.png">
+                    </div>
+
+                    <div class="title">
+                        <h1><u><b>Destinatii Turistice Populare</b></u></h1>
+                    </div>
+                    
+                
+                    <div class="continent-container">
+                        <div class="continent">
+                            <h2><u>Italia</u></h2>
+                            <div class="country">
+                                <h3>Roma</h3>
+                                <ul class="city">
+                                    <li><a href="Roma.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Roma')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                
+                            <div class="country">
+                                <h3>Venetia</h3>
+                                <ul class="city">
+                                    <li><a href="Venetia.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Venetia')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                
+                        <div class="continent">
+                            <h2><u>Franta</u></h2>
+                            <div class="country">
+                                <h3>Paris</h3>
+                                <ul class="city">
+                                    <li><a href="Paris.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Paris')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                
+                            <div class="country">
+                                <h3>Nisa</h3>
+                                <ul class="city">
+                                    <li><a href="Nisa.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Nisa')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                
+                        <div class="continent">
+                            <h2><u>Spania</u></h2>
+                            <div class="country">
+                                <h3>Barcelona</h3>
+                                <ul class="city">
+                                    <li><a href="Barcelona.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Barcelona')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                
+                            <div class="country">
+                                <h3>Madrid</h3>
+                                <ul class="city">
+                                    <li><a href="Madrid.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Madrid')">Booking.com</a></li>                                  
+                                </ul>
+                            </div>
+                        </div>
+                
+                        <div class="continent">
+                            <h2><u>Germania</u></h2>
+                            <div class="country">
+                                <h3>Berlin</h3>
+                                <ul class="city">
+                                    <li><a href="Berlin.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Berlin')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                
+                            <div class="country">
+                                <h3>Stuttgart</h3>
+                                <ul class="city">
+                                    <li><a href="Stuttgart.html" class="button">Informatii</a></li>                                   
+                                    <li><a class="button" onclick="redirectToCity('Stuttgart')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                
+                        <div class="continent">
+                            <h2><u>Grecia</u></h2>
+                            <div class="country">
+                                <h3>Atena</h3>
+                                <ul class="city">
+                                    <li><a href="Atena.html" class="button">Informatii</a></li>                                    
+                                    <li><a class="button" onclick="redirectToCity('Atena')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                
+                            <div class="country">
+                                <h3>Thasos</h3>
+                                <ul class="city">
+                                    <li><a href="Thasos.html" class="button">Informatii</a></li>                                    
+                                    <li><a class="button" onclick="redirectToCity('Thasos')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                
+                        <div class="continent">
+                            <h2><u>Marea Britanie</u></h2>
+                            <div class="country">
+                                <h3>Londra</h3>
+                                <ul class="city">
+                                    <li><a href="Londra.html" class="button">Informatii</a></li>                                   
+                                    <li><a class="button" onclick="redirectToCity('Londra')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                
+                            <div class="country">
+                                <h3>Edinburgh</h3>
+                                <ul class="city">
+                                    <li><a href="Edinburgh.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Edinburgh')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="continent">
+                            <h2><u> SUA</u></h2>
+                            <div class="country">
+                                <h3>New York</h3>
+                                <ul class="city">
+                                    <li><a href="NewYork.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('New York')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>Los Angeles</h3>
+                                <ul class="city">
+                                    <li><a href="LosAngeles.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Los Angeles')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="continent">
+                            <h2><u>Japonia</u></h2>
+                            <div class="country">
+                                <h3>Tokyo</h3>
+                                <ul class="city">
+                                    <li><a href="Tokyo.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Tokyo')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>Kyoto</h3>
+                                <ul class="city">
+                                    <li><a href="Kyoto.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Kyoto')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="continent">
+                            <h2><u>Australia</u></h2>
+                            <div class="country">
+                                <h3>Sydney</h3>
+                                <ul class="city">
+                                    <li><a href="Sydney.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Sydney')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>Melbourne</h3>
+                                <ul class="city">
+                                    <li><a href="Melbourne.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Melbourne')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+						
+                        
+                        <div class="image-container">
+                            <img src="avionzbor.png">
+                        </div>
+                        
+                        <div class="continent">
+                            <h2><u>Canada</u></h2>
+                            <div class="country">
+                                <h3>Toronto</h3>
+                                <ul class="city">
+                                    <li><a href="Toronto.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Toronto')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>Vancouver</h3>
+                                <ul class="city">
+                                    <li><a href="Vancouver.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Vancouver')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="continent">
+                            <h2><u>Brazilia</u></h2>
+                            <div class="country">
+                                <h3>Rio de Janeiro</h3>
+                                <ul class="city">
+                                    <li><a href="Rio.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Rio de Janeiro')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>Sao Paulo</h3>
+                                <ul class="city">
+                                    <li><a href="SaoPaulo.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Sao Paulo')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="continent">
+                            <h2><u>China</u></h2>
+                            <div class="country">
+                                <h3>Beijing</h3>
+                                <ul class="city">
+                                    <li><a href="Beijing.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Beijing')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>Shanghai</h3>
+                                <ul class="city">
+                                    <li><a href="Shanghai.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Shanghai')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="continent">
+                            <h2><u>Egipt</u></h2>
+                            <div class="country">
+                                <h3>Cairo</h3>
+                                <ul class="city">
+                                    <li><a href="Cairo.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Cairo')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>Hurghada</h3>
+                                <ul class="city">
+                                    <li><a href="Hurghada.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Hurghada')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="continent">
+                            <h2><u>Rusia</u></h2>
+                            <div class="country">
+                                <h3>Moscova</h3>
+                                <ul class="city">
+                                    <li><a href="Moscova.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Moscow')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>St. Petersburg</h3>
+                                <ul class="city">
+                                    <li><a href="StPetersburg.html" class="button">Informatii</a></li>                                   
+                                    <li><a class="button" onclick="redirectToCity('St. Petersburg')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="continent">
+                            <h2><u>Mexic</u></h2>
+                            <div class="country">
+                                <h3>Cancun</h3>
+                                <ul class="city">
+                                    <li><a href="Cancun.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Cancun')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="country">
+                                <h3>Mexico City</h3>
+                                <ul class="city">
+                                    <li><a href="MexicoCity.html" class="button">Informatii</a></li>
+                                    <li><a class="button" onclick="redirectToCity('Mexico City')">Booking.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="image-container">
+                            <img src="avionaterizare.png">
+                        </div>
+                    </div>
+                </body>
+        
+        <div class="line"></div>
+        <br><br>
+        <div class="footer-image-container">
+            <img src="Untitled-1.png">
+        </div>
+        <footer>
+            <center><p>&copy; 2023 Raytrip. Toate drepturile rezervate.</p></center>
+            <center>
+            <div class="footer-buttons">
+			  <a href="paginagenerare.html" class="footer-button">Genereaza o locatie</a>
+              <a href="contact.html" class="footer-button">Contact</a>
+              <a href="recenzii.html" class="footer-button">Recenzii</a>
+              <a href="readme.html" class="footer-button">ReadMe</a>
+              <a href="signup.html" class="footer-button">Sign Up | Login</a></center>
+            </div>
+          </footer>
+        </body>
+</html>

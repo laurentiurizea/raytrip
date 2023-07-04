@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<language="ro"></language>
+<html>
+<head>
+    <title>Log In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3f5a36;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border: 3px solid #000;
+            border-radius: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .container h2 {
+                text-align: center;
+            }
+
+            .container input[type="text"],
+            .container input[type="password"],
+            .container input[type="email"] {
+                width: 95%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+
+            .container input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #4CAF50;
+                color: #fff;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+                .container input[type="submit"]:hover {
+                    background-color: #45a049;
+                }
+
+            .container p {
+                text-align: center;
+            }
+
+            .container .home-button {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+                .container .home-button a {
+                    text-decoration: none;
+                    background-color: #ccc;
+                    color: #000;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                }
+                .button:hover {
+                background-color: #4e6d45;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Log In</h2>
+        <form action="register.php" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Parola" required>
+            <input type="password" name="confirm_password" placeholder="Confirma Parola" required>
+            <input type="submit" value="Sign Up">
+        </form>
+
+        <p>Nu ai cont? <a href="signup.html">Sign Up</a></p>
+
+        <div class="home-button">
+            <a href="index.html">Acasa</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = form.querySelector('input[name="username"]').value;
+            const email = form.querySelector('input[name="email"]').value;
+            const password = form.querySelector('input[name="password"]').value;
+            const confirm_password = form.querySelector('input[name="confirm_password"]').value;
+
+            if (username && email && password && confirm_password && password === confirm_password) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

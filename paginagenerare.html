@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Locația ta de vis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3f5a36;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+    .container {
+        width: 400px;
+        padding: 20px;
+        background-color: #fff;
+        border: 3px solid #000;
+        border-radius: 15px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .container h1 {
+        text-align: center;
+    }
+
+    .container p,
+    .container label {
+        text-align: center;
+    }
+    .button:hover {
+                background-color: #4e6d45;
+            }
+
+    .container input[type="text"],
+    .container button {
+        width: 95%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .container #rezultat {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    .container .home-button {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .container .home-button a {
+            text-decoration: none;
+            background-color: #ccc;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+</style>
+<script>
+    function recomandaLocatie() {
+        var destinatieInput = document.getElementById("destinatie");
+        var activitateInput = document.getElementById("activitate");
+        var rezultatDiv = document.getElementById("rezultat");
+
+        var destinatie = destinatieInput.value;
+        var activitate = activitateInput.value;
+
+        var recomandare = "Recomandarea noastră pentru tine este să vizitezi " + destinatie + " și să te bucuri de " + activitate + "!";
+        rezultatDiv.innerHTML = recomandare;
+    }
+</script>
+</head>
+<body>
+    <div class="image-container">
+        <img src="Untitled.fig">
+    </div>
+    <div class="container">
+        <h1>Locația ta de vis</h1>
+        <p>Introduceți informațiile despre locația voastră de vis:</p>
+        <label for="destinatie">Destinație:</label>
+        <input type="text" id="destinatie" required>
+        <br><br>
+        <label for="activitate">Activitate:</label>
+        <input type="text" id="activitate" required>
+        <br><br>
+        <button onclick="recomandaLocatie()">Recomandă</button>
+        <br><br>
+        <div id="rezultat"></div>
+        <div class="home-button">
+            <a href="index.html">Acasă</a>
+        </div>
+    </div>
+</body>
+</html>
